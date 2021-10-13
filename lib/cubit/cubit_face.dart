@@ -14,7 +14,7 @@ import 'package:facebook/modules/watch/watchscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class CubitFaceHome extends Cubit<CubitStateFace> {
   CubitFaceHome() : super(InitializeCubitState());
@@ -70,6 +70,16 @@ class CubitFaceHome extends Cubit<CubitStateFace> {
     }
   }
 
+  void uploadingImage() {
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('images/${Uri.file(profileImage!.path).pathSegments.last}')
+        .putFile(profileImage!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {}).catchError((error) {});
+    }).catchError((error) {});
+  }
+
   File? profileCover;
   Future<void> getProfileCover() async {
     final pickedFile = await picker.pickImage(
@@ -85,5 +95,15 @@ class CubitFaceHome extends Cubit<CubitStateFace> {
       print('No image selected.');
       emit(ChooseImagePickerScreenError());
     }
+  }
+
+  void uploadingCover() {
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('images/${Uri.file(profileCover!.path).pathSegments.last}')
+        .putFile(profileCover!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {}).catchError((error) {});
+    }).catchError((error) {});
   }
 }
