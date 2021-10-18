@@ -5,9 +5,20 @@ class CreateProfile {
   String? phone;
   String? uId;
   String? token;
+  String? image;
+  String? cover;
+  String? bio;
 
-  CreateProfile(
-      {required this.password, required this.uId, required this.email});
+  CreateProfile({
+    this.password,
+    this.phone,
+    this.uId,
+    this.email,
+    this.image,
+    this.cover,
+    this.name,
+    this.bio,
+  });
 
   CreateProfile.fromJson(Map<String, dynamic>? json) {
     email = json?['email'];
@@ -16,6 +27,7 @@ class CreateProfile {
     uId = json?['uId'];
     token = json?['token'];
     phone = json?['phone'];
+    bio = json?['bio'];
   }
 
   Map<String, dynamic> toMap() {
@@ -26,6 +38,7 @@ class CreateProfile {
       'password': password,
       'uId': uId,
       'token': token,
+      'bio': bio,
     };
   }
 }

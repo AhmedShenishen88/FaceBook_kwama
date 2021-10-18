@@ -3,6 +3,7 @@ import 'package:facebook/cubit/cubit_state.dart';
 import 'package:facebook/styles/icons_broken.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -18,19 +19,61 @@ class ProfileScreen extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 titleSpacing: 2,
-                title: Expanded(
-                  child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(20)),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(IconBroken.Search),
-                          hintText: 'Search',
-                          border: InputBorder.none,
-                        ),
-                      )),
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(20)),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(IconBroken.Search),
+                              hintText: 'Search',
+                              border: InputBorder.none,
+                            ),
+                          )),
+                    ),
+                    if (pickerCover != null || pickerImage != null)
+                      const SizedBox(
+                        width: 4,
+                      ),
+                    if (pickerCover != null || pickerImage != null)
+                      Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.grey[300]),
+                          child: TextButton(
+                              onPressed: () {
+                                // CubitFaceHome.get(context).updateChanges(image: pickerImage, bio: bio, cover: pickerImage, name: name)
+                              },
+                              child: Text(
+                                'Reset',
+                                style: TextStyle(
+                                    color: Colors.blue[300],
+                                    fontWeight: FontWeight.bold),
+                              ))),
+                    if (pickerCover != null || pickerImage != null)
+                      const SizedBox(
+                        width: 4,
+                      ),
+                    if (pickerCover != null || pickerImage != null)
+                      Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.grey[300]),
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Save',
+                                style: TextStyle(
+                                    color: Colors.blue[300],
+                                    fontWeight: FontWeight.bold),
+                              )))
+                  ],
                 ),
               ),
               body: SingleChildScrollView(

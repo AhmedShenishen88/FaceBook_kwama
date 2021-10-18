@@ -70,14 +70,25 @@ class CubitFaceHome extends Cubit<CubitStateFace> {
     }
   }
 
-  void uploadingImage() {
+  void uploadingImage({
+    required String bio,
+    required String cover,
+    required String name,
+  }) {
     firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('images/${Uri.file(profileImage!.path).pathSegments.last}')
+        .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
         .putFile(profileImage!)
         .then((value) {
-      value.ref.getDownloadURL().then((value) {}).catchError((error) {});
-    }).catchError((error) {});
+      value.ref.getDownloadURL().then((value) {
+        updateChanges(image: value, bio: bio, cover: cover, name: name);
+        emit(UploadingImagePickerScreenSuccess());
+      }).catchError((error) {
+        emit(UploadingImagePickerScreenError());
+      });
+    }).catchError((error) {
+      emit(UploadingImagePickerScreenError());
+    });
   }
 
   File? profileCover;
@@ -97,13 +108,46 @@ class CubitFaceHome extends Cubit<CubitStateFace> {
     }
   }
 
-  void uploadingCover() {
+  void uploadingCover({
+    required String image,
+    required String bio,
+    required String name,
+  }) {
     firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('images/${Uri.file(profileCover!.path).pathSegments.last}')
+        .child('users/${Uri.file(profileCover!.path).pathSegments.last}')
         .putFile(profileCover!)
         .then((value) {
-      value.ref.getDownloadURL().then((value) {}).catchError((error) {});
-    }).catchError((error) {});
+      value.ref.getDownloadURL().then((value) {
+        updateChanges(image: image, bio: bio, cover: value, name: name);
+        emit(UploadingCoverPickerScreenSuccess());
+      }).catchError((error) {
+        emit(UploadingCoverPickerScreenError());
+      });
+    }).catchError((error) {
+      emit(UploadingCoverPickerScreenError());
+    });
+  }
+
+  late CreateProfile modelUpdate;
+  void updateChanges({
+    required String image,
+    required String bio,
+    required String cover,
+    required String name,
+  }) {
+    modelUpdate = CreateProfile(
+      image: image,
+      uId: model!.uId,
+      name: name,
+      bio: bio,
+      cover: cover,
+    );
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .update(modelUpdate.toMap())
+        .then((value) {})
+        .catchError((error) {});
   }
 }
