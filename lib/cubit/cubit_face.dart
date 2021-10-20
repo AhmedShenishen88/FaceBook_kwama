@@ -131,21 +131,21 @@ class CubitFaceHome extends Cubit<CubitStateFace> {
 
   late CreateProfile modelUpdate;
   void updateChanges({
-    required String image,
-    required String bio,
-    required String cover,
-    required String name,
+    String? image,
+    String? cover,
+    String? bio,
+    String? name,
   }) {
     modelUpdate = CreateProfile(
-      image: image,
+      image: image ?? model!.image,
       uId: model!.uId,
       name: name,
       bio: bio,
-      cover: cover,
+      cover: cover ?? model!.cover,
     );
     FirebaseFirestore.instance
         .collection('users')
-        .doc(uId)
+        .doc(model!.uId)
         .update(modelUpdate.toMap())
         .then((value) {})
         .catchError((error) {});

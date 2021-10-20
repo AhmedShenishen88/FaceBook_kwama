@@ -46,9 +46,7 @@ class ProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.grey[300]),
                           child: TextButton(
-                              onPressed: () {
-                                // CubitFaceHome.get(context).updateChanges(image: pickerImage, bio: bio, cover: pickerImage, name: name)
-                              },
+                              onPressed: () {},
                               child: Text(
                                 'Reset',
                                 style: TextStyle(
@@ -66,7 +64,9 @@ class ProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.grey[300]),
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                CubitFaceHome.get(context).updateChanges();
+                              },
                               child: Text(
                                 'Save',
                                 style: TextStyle(
@@ -150,7 +150,8 @@ class ProfileScreen extends StatelessWidget {
                                               ? const CircleAvatar(
                                                   radius: 70,
                                                   backgroundImage: NetworkImage(
-                                                      'https://scontent.faly1-2.fna.fbcdn.net/v/t1.6435-1/p240x240/244726719_4389031117886388_616164943763178058_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeGYHDGZE0lMUSkmtHeHzFZqzNcd3PxKVrDM1x3c_EpWsIDLJ_ihkq0dp-2ptdONbAhGgt99c-jxm9diGSOxWOTu&_nc_ohc=HSKSTsz2CvYAX97QLjS&_nc_ht=scontent.faly1-2.fna&oh=e2c9ffd303395d35bc6f9c3282c6ca90&oe=618936E7'))
+                                                    'https://scontent.faly1-2.fna.fbcdn.net/v/t1.6435-1/p240x240/244726719_4389031117886388_616164943763178058_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeGYHDGZE0lMUSkmtHeHzFZqzNcd3PxKVrDM1x3c_EpWsIDLJ_ihkq0dp-2ptdONbAhGgt99c-jxm9diGSOxWOTu&_nc_ohc=HSKSTsz2CvYAX97QLjS&_nc_ht=scontent.faly1-2.fna&oh=e2c9ffd303395d35bc6f9c3282c6ca90&oe=618936E7',
+                                                  ))
                                               : CircleAvatar(
                                                   radius: 70,
                                                   backgroundImage:

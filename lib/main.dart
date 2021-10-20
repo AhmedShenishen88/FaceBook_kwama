@@ -50,7 +50,7 @@ class MaterialHome extends StatelessWidget {
           builder: (context, index) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: HomeFace(),
+              home: startWidget,
               theme: ThemeData(
                   scaffoldBackgroundColor: Colors.white,
                   appBarTheme: AppBarTheme(

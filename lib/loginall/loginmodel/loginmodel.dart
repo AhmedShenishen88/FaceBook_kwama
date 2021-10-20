@@ -8,6 +8,7 @@ class CreateProfile {
   String? image;
   String? cover;
   String? bio;
+  bool? isEmailVerified;
 
   CreateProfile({
     this.password,
@@ -18,6 +19,7 @@ class CreateProfile {
     this.cover,
     this.name,
     this.bio,
+    this.isEmailVerified,
   });
 
   CreateProfile.fromJson(Map<String, dynamic>? json) {
@@ -28,6 +30,9 @@ class CreateProfile {
     token = json?['token'];
     phone = json?['phone'];
     bio = json?['bio'];
+    image = json?['image'];
+    cover = json?['cover'];
+    isEmailVerified = json?['isEmailVerified'];
   }
 
   Map<String, dynamic> toMap() {
@@ -35,10 +40,11 @@ class CreateProfile {
       'email': email,
       'phone': phone,
       'name': name,
-      'password': password,
+      'cover': cover,
       'uId': uId,
-      'token': token,
+      'image': image,
       'bio': bio,
+      'isEmailVerified': isEmailVerified,
     };
   }
 }
