@@ -21,6 +21,7 @@ void main() async {
   await CashHelper.init();
   Bloc.observer = MyBlocObserver();
 
+  print('Welcome');
   Widget widget;
 
   uId = CashHelper.getData(key: 'uId');
