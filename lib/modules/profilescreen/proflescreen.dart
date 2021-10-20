@@ -1,5 +1,6 @@
 import 'package:facebook/cubit/cubit_face.dart';
 import 'package:facebook/cubit/cubit_state.dart';
+import 'package:facebook/modules/profilescreen/editprofile.dart';
 import 'package:facebook/styles/icons_broken.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -124,12 +125,12 @@ class ProfileScreen extends StatelessWidget {
                                           padding: const EdgeInsets.all(8.0),
                                           child: CircleAvatar(
                                             backgroundColor: Colors.grey[300],
-                                            child: IconButton(
-                                              onPressed: () {
+                                            child: InkWell(
+                                              onTap: () {
                                                 CubitFaceHome.get(context)
                                                     .getProfileCover();
                                               },
-                                              icon: const Icon(
+                                              child: const Icon(
                                                 IconBroken.Camera,
                                                 color: Colors.black,
                                               ),
@@ -158,12 +159,12 @@ class ProfileScreen extends StatelessWidget {
                                                       FileImage(pickerImage))),
                                       CircleAvatar(
                                         backgroundColor: Colors.grey[300],
-                                        child: IconButton(
-                                          onPressed: () {
+                                        child: InkWell(
+                                          onTap: () {
                                             CubitFaceHome.get(context)
                                                 .getProfileImage();
                                           },
-                                          icon: const Icon(
+                                          child: const Icon(
                                             IconBroken.Camera,
                                             color: Colors.black,
                                           ),
@@ -228,7 +229,14 @@ class ProfileScreen extends StatelessWidget {
                                         color: Colors.grey[300],
                                         borderRadius: BorderRadius.circular(7)),
                                     child: TextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditProfile()),
+                                        );
+                                      },
                                       child: Row(
                                         children: const [
                                           Icon(
